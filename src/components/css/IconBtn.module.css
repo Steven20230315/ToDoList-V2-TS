@@ -1,0 +1,37 @@
+.add_task_btn {
+  border: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--btn-text-color);
+  gap: 0.5rem;
+
+  &:hover {
+    cursor: pointer;
+    color: var(--btn-color);
+
+    & .add_task_btn_icon {
+      color: white;
+    }
+
+    & .add_task_btn_icon_circle {
+      background-color: var(--btn-color);
+    }
+  }
+}
+
+.add_task_btn_icon {
+  color: var(--btn-color);
+  font-size: var(--btn-size);
+}
+
+.add_task_btn_icon_circle {
+  border-radius: 50%;
+  background-color: transparent;
+  width: var(--btn-size);
+  height: var(--btn-size);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
