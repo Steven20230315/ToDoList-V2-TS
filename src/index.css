@@ -69,3 +69,7 @@ button.submit_btn {
     background-color: var(--submit-btn-hover-text-color);
   }
 }
+
+li {
+  list-style: none;
+}

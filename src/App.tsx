@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import IconBtn from './components/IconBtn';
 import AddTaskForm from './components/AddTaskForm';
+import TasksHolder from './components/TasksHolder';
 import './App.css';
 
-type TaskInfo = {
+export type TaskInfo = {
 	id: number;
-	name: string;
+	title: string;
 	description: string;
 	date: string;
 	priority: string;
@@ -13,12 +14,14 @@ type TaskInfo = {
 };
 
 function App() {
-  const [isClicked, setIsClicked] = useState(false);
-  const [tasks, setTasks] = useState<TaskInfo[]>([]);
+	const [isClicked, setIsClicked] = useState(false);
+	const [tasks, setTasks] = useState<TaskInfo[]>([]);
 
-  const handleAddTask = (task: TaskInfo) => {
-    setTasks([...tasks, task]);
-  };
+	const handleAddTask = (task: TaskInfo) => {
+		setTasks([...tasks, task]);
+		console.log('add task', task);
+		setIsClicked(false);
+	};
 
 	const handleClick = () => {
 		setIsClicked(!isClicked);
@@ -31,8 +34,11 @@ function App() {
 
 	return (
 		<>
+			<TasksHolder tasks={tasks} />
 			{isClicked ? null : <IconBtn onClick={handleClick} />}
-			{isClicked ? <AddTaskForm onCancel={handleCancel} /> : null}
+			{isClicked ? (
+				<AddTaskForm onCancel={handleCancel} onAddTask={handleAddTask} />
+			) : null}
 		</>
 	);
 }
