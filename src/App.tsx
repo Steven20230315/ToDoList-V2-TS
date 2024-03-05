@@ -2,7 +2,8 @@ import { useState } from 'react';
 import IconBtn from './components/IconBtn';
 import AddTaskForm from './components/AddTaskForm';
 import TasksHolder from './components/TasksHolder';
-import './App.css';
+import SidebarContainer from './components/SidebarContainer';
+import NavbarBtn from './components/SidebarToggleBtn';
 
 export type TaskInfo = {
 	id: number;
@@ -34,11 +35,17 @@ function App() {
 
 	return (
 		<>
-			<TasksHolder tasks={tasks} />
-			{isClicked ? null : <IconBtn onClick={handleClick} />}
-			{isClicked ? (
-				<AddTaskForm onCancel={handleCancel} onAddTask={handleAddTask} />
-			) : null}
+			<div>
+				<SidebarContainer>
+				</SidebarContainer>
+			</div>
+			<div className='main-content-container'>
+				<TasksHolder tasks={tasks} />
+				{isClicked ? null : <IconBtn onClick={handleClick} />}
+				{isClicked ? (
+					<AddTaskForm onCancel={handleCancel} onAddTask={handleAddTask} />
+				) : null}
+			</div>
 		</>
 	);
 }
