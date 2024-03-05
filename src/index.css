@@ -68,6 +68,10 @@ button.submit_btn {
   &:hover {
     background-color: var(--submit-btn-hover-text-color);
   }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
 }
 
 li {
