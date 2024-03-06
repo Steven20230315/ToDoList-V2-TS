@@ -3,7 +3,7 @@ import Sidebar from './Sidebar';
 import SidebarToggleBtn from './SidebarToggleBtn';
 
 type SidebarContainerProps = PropsWithChildren<{}>;
-
+// TODO: Now, when screen width is smaller than 768px, the sidebar is not shown. And user can't open it. In the future, even when screen width is smaller than 768px, the sidebar should be able to be opened and closed. And it should be on top of the main content (z-index). I am not sure should I create a new component for this or I can use CSS to implement this feature. 
 export default function SidebarContainer({ children }: SidebarContainerProps) {
 	const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 

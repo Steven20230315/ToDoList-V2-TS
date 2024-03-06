@@ -3,8 +3,7 @@ import IconBtn from './components/IconBtn';
 import AddTaskForm from './components/AddTaskForm';
 import TasksHolder from './components/TasksHolder';
 import SidebarContainer from './components/SidebarContainer';
-import NavbarBtn from './components/SidebarToggleBtn';
-
+import LoginForm from './components/LoginForm';
 export type TaskInfo = {
 	id: number;
 	title: string;
@@ -36,10 +35,11 @@ function App() {
 	return (
 		<>
 			<div>
-				<SidebarContainer>
-				</SidebarContainer>
+				<SidebarContainer></SidebarContainer>
 			</div>
+
 			<div className='main-content-container'>
+				<LoginForm />
 				<TasksHolder tasks={tasks} />
 				{isClicked ? null : <IconBtn onClick={handleClick} />}
 				{isClicked ? (
