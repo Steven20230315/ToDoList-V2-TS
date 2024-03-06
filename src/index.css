@@ -145,3 +145,10 @@ a {
     right: -15px;
   }
 }
+
+.login_form{
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--text-color-white);
+  padding: 1rem;
+}
