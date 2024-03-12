@@ -11,7 +11,6 @@ export default function SubmitBtn({ text }: SubmitBtnProps) {
 			role='submit'
 			type='submit'
 			className='submit_btn'
-			// disabled={disabled}
 		>
 			{text}
 		</button>

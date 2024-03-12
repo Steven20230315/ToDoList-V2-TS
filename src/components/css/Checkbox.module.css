@@ -1,0 +1,17 @@
+.checkbox {
+  position: absolute;
+  left: 5px;
+  top: 4px;
+  transition: all 1s ease-out;
+
+}
+
+.checkbox_circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid var(--text-color-white);
+}

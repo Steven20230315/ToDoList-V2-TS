@@ -1,0 +1,13 @@
+.task {
+  border-bottom: 1px solid var(--text-color-white);
+  padding: 0.75rem;
+  padding-left: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

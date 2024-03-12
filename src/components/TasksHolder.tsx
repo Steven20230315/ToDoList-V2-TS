@@ -1,21 +1,15 @@
+import style from './css/TasksHolder.module.css';
+import Tasks from './Tasks';
+import { useTasksContext } from '../components/store/tasks_context';
 import { PropsWithChildren } from 'react';
-import { type TaskInfo } from '../App';
-
-type TasksHolderProps = PropsWithChildren<{
-	tasks: TaskInfo[];
-}>;
-export default function TasksHolder({ tasks, children }: TasksHolderProps) {
+export default function TasksHolder({ children }: PropsWithChildren) {
+	const { tasks: contextTasks } = useTasksContext();
+	console.log('tasks', contextTasks);
 	return (
-		<div>
-			<ul>
-				{tasks.map((task) => (
-					<li key={task.id}>
-						<div>{task.title}</div>
-						<div>{task.description}</div>
-					</li>
-				))}
-			</ul>
+		<div className={style.task_holder_container}>
 			{children}
+			<hr />
+			<Tasks />
 		</div>
 	);
 }

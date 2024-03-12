@@ -40,8 +40,9 @@ const Form = forwardRef(function Form(
 	};
 
 	return (
-		<form {...props} onSubmit={handleSubmit} ref={formRef} >
+		<form {...props} onSubmit={handleSubmit} ref={formRef}>
 			{children}
+			<button type='submit'>Submit</button>
 		</form>
 	);
 });
