@@ -6,6 +6,7 @@ import SubmitBtn from './SubmitBtn';
 import { useState, useRef } from 'react';
 import Input from './Input';
 import Form, { FormHandler } from './Form';
+import { v4 as uuidv4 } from 'uuid';
 import DataPickerBtn from './DatePickerBtn';
 import IconBtn from './IconBtn';
 import {
@@ -19,29 +20,14 @@ export default function AddTaskForm() {
 	const [openForm, setOpenForm] = useState(false);
 	const [isDataComplete, setIsDataComplete] = useState(false);
 	const handleSave = (value: unknown) => {
-		type FormData = {
-			title: string;
-			description: string;
-		};
-
-		const defaultPriority = 'Medium';
-		const defaultLabel = 'Personal';
-		const defaultDate = new Date().toISOString().slice(0, 10);
-		const taskId = Math.random();
-
 		const data: TaskInfo = {
-			...(value as FormData),
-			priority: defaultPriority,
-			label: defaultLabel,
-			date: defaultDate,
-			id: taskId,
+			...(value as TaskInfo),
+			id: uuidv4(),
 		};
 		addTask(data);
 		formRef.current?.clear();
 		setOpenForm(false);
 	};
-
-
 
 	if (!openForm) return <IconBtn onClick={() => setOpenForm(true)} />;
 	return (
@@ -53,15 +39,22 @@ export default function AddTaskForm() {
 		>
 			<div className={style.add_task_form_header}>
 				<div className={style.add_task_form_input_container}>
-
-
 					<Input type='text' id='title' placeholder='Task name' />
 					<Input type='text' id='description' placeholder='Description' />
 				</div>
 				<div className={style.add_task_form_action_group}>
-					<DataPickerBtn />
-					<div>Priority</div>
-					<div>Label</div>
+					{/* <DataPickerBtn /> */}
+					<input type='date' name='' id='' />
+					<select name='priority' id='priority'>
+						<option value='Low'>Low</option>
+						<option value='Medium'>Medium</option>
+						<option value='High'>High</option>
+					</select>
+					<select name='label' id='label'>
+						<option value='Personal'>Personal</option>
+						<option value='Work'>Work</option>
+						<option value='Study'>Study</option>
+					</select>
 				</div>
 			</div>
 			<div className={style.add_task_form_btn_container}>
