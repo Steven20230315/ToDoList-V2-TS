@@ -1,8 +1,9 @@
 import { PropsWithChildren, useState } from 'react';
+import IconBtn from './IconBtn';
+import { RxCross2 } from 'react-icons/rx';
 // import ReactDOM from 'react-dom';
 
 type ModalProps = {
-	open: boolean;
 	onClose: () => void;
 } & PropsWithChildren;
 
@@ -22,21 +23,19 @@ type ModalProps = {
 // 	);
 // }
 
-export default function Modal({ open, onClose, children }: ModalProps) {
-	const handleCLoseModal = (event: React.MouseEvent) => {
-		event.stopPropagation(); // Prevent event propagation to the parent elements
-		setIsOpen(false);
+export default function Modal({ onClose, children }: ModalProps) {
+	const handleCloseModal = (event: React.MouseEvent) => {
+		event.stopPropagation();
+		onClose();
 	};
-
-	const [isOpen, setIsOpen] = useState(open);
-	if (!isOpen) return null;
 	return (
 		<>
-			<div className='modal_overlay' onClick={handleCLoseModal}>
-				<button>Open</button>
-			</div>
+			<div className='modal_overlay' onClick={handleCloseModal}></div>
 			<div className='modal'>
-				<button onClick={handleCLoseModal}>Close</button>
+				{/* <IconBtn text='' onClick={handleCloseModal} icon={<RxCross2 />} /> */}
+				<button onClick={handleCloseModal} className='modal_close_btn'>
+					<RxCross2 />
+				</button>
 				{children}
 			</div>
 		</>

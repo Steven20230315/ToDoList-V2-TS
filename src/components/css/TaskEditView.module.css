@@ -1,0 +1,20 @@
+.task_details_container {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  height: 100%;
+  border-top: 1px solid var(--primary-divider-color);
+  margin: 0;
+  padding: 0;
+}
+
+.task_main_content {
+  background-color: var(--primary-background-color);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.task_details_sidebar {
+  background-color: var(--background-color-gray);
+}
+
