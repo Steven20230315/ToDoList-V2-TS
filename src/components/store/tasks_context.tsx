@@ -1,19 +1,17 @@
 import { createContext, useContext, useReducer } from 'react';
 
 export type TaskInfo = {
-	id: number;
+	id: string;
 	title: string;
 	description: string;
 	date: string;
-	priority: string;
-	label: string;
+	priority: 'low' | 'medium' | 'high';
+	label: 'personal' | 'work' | 'study';
 };
 // 定義task 相關 action 的type
 type TaskAction = {
-	deleteTask: (id: number) => void;
+	deleteTask: (id: string) => void;
 	addTask: (task: TaskInfo) => void;
-	openTaskModal(task: TaskInfo): void;
-	closeTaskModal(): void;
 };
 
 type TasksContextValue = {
@@ -22,7 +20,7 @@ type TasksContextValue = {
 
 type DeleteTaskAction = {
 	type: 'DELETE';
-	id: number;
+	id: string;
 };
 
 type AddTaskAction = {
@@ -30,15 +28,7 @@ type AddTaskAction = {
 	task: TaskInfo;
 };
 
-type OpenModalAction = {
-	type: 'OPEN_MODAL' | 'OPEN_COMMENT';
-	task: TaskInfo;
-};
-
-
-
-
-type Action = DeleteTaskAction | AddTaskAction | OpenModalAction;
+type Action = DeleteTaskAction | AddTaskAction;
 
 export const TasksContext = createContext<TasksContextValue | null>(null);
 
@@ -69,63 +59,65 @@ type TasksContextProviderProps = {
 	children: React.ReactNode;
 };
 
+const initialTasks: TaskInfo[] = [
+	{
+		id: '1',
+		title: 'Task 1',
+		description: 'Description for Task 1',
+		date: '2024-03-11',
+		priority: 'medium',
+		label: 'personal',
+	},
+	{
+		id: '2',
+		title: 'Task 2',
+		description: 'Description for Task 2',
+		date: '2024-03-12',
+		priority: 'high',
+		label: 'work',
+	},
+	{
+		id: '3',
+		title: 'Task 3',
+		description: 'Description for Task 3',
+		date: '2024-03-13',
+		priority: 'low',
+		label: 'study',
+	},
+	{
+		id: '4',
+		title: 'Task 4',
+		description: 'Description for Task 4',
+		date: '2024-03-14',
+		priority: 'high',
+		label: 'personal',
+	},
+	{
+		id: '5',
+		title: 'Task 5',
+		description: 'Description for Task 5',
+		date: '2024-03-15',
+		priority: 'low',
+		label: 'work',
+	},
+];
+
 export default function TasksContextProvider({
 	children,
 }: TasksContextProviderProps) {
-	const [tasks, dispatch] = useReducer(tasksReducer, [
-		{
-			id: 1,
-			title: 'Task 1',
-			description: 'Description for Task 1',
-			date: '2024-03-11',
-			priority: 'Medium',
-			label: 'Personal',
-		},
-		{
-			id: 2,
-			title: 'Task 2',
-			description: 'Description for Task 2',
-			date: '2024-03-12',
-			priority: 'High',
-			label: 'Work',
-		},
-		{
-			id: 3,
-			title: 'Task 3',
-			description: 'Description for Task 3',
-			date: '2024-03-13',
-			priority: 'Low',
-			label: 'Study',
-		},
-		{
-			id: 4,
-			title: 'Task 4',
-			description: 'Description for Task 4',
-			date: '2024-03-14',
-			priority: 'High',
-			label: 'Personal',
-		},
-		{
-			id: 5,
-			title: 'Task 5',
-			description: 'Description for Task 5',
-			date: '2024-03-15',
-			priority: 'Low',
-			label: 'Work',
-		},
-	]);
+	// const [tasks, dispatch] = useReducer(tasksReducer, []);
+	const [tasks, dispatch] = useReducer<React.Reducer<TaskInfo[], Action>>(
+		tasksReducer,
+		initialTasks
+	);
 	const TasksContextValue = {
 		tasks,
-		deleteTask: (id: number) => {
+		deleteTask: (id: string) => {
 			dispatch({ type: 'DELETE', id });
 		},
 		addTask: (task: TaskInfo) => {
 			dispatch({ type: 'ADD', task });
-		},openModal: (task: TaskInfo) => {
-			dispatch({ type: 'OPEN_MODAL', task });
-		},closeModal: () => {
-			dispatch({ type: 'CLOSE_MODAL' });
-		}
+		},
 	};
 	return (
 		<TasksContext.Provider value={TasksContextValue}>
