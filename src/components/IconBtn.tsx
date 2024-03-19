@@ -5,14 +5,18 @@ import { LuPlus } from 'react-icons/lu';
 type IconBtnProps = {
 	// text is optional. Default value is 'Add task'
 	text?: string;
-	onClick?: () => void;
+	onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+	icon?: JSX.Element;
 };
-
-export default function IconBtn({ text = 'Add task', onClick }: IconBtnProps) {
+export default function IconBtn({
+	text = 'Add task',
+	onClick,
+	icon,
+}: IconBtnProps) {
 	return (
 		<button className={style.add_task_btn} onClick={onClick}>
 			<span className={style.add_task_btn_icon_circle}>
-				<LuPlus className={style.add_task_btn_icon} />
+				{icon ? icon : <LuPlus className={style.add_task_btn_icon} />}
 			</span>
 			{text}
 		</button>
